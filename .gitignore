@@ -1,0 +1,40 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# ===== Virtual Environment =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ===== Model weights (حجم زیاد) =====
+saved_model/weights.h5
+saved_model/*.h5
+saved_model/*.keras
+saved_model/checkpoint*
+
+# ===== داده‌های بزرگ =====
+*.csv
+*.tsv
+*.txt
+!requirements.txt
+!README.md
+
+# ===== لاگ‌ها =====
+logs/
+
+# ===== Code Runner temp =====
+tempCodeRunnerFile.py

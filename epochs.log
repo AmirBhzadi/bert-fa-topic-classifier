@@ -1,0 +1,12 @@
+train:
+    Epoch 1/5
+    583/583 [==============================] - 128s 204ms/step - loss: 0.2627 - accuracy: 0.9184 - val_loss: 0.1172 - val_accuracy: 0.9649
+    Epoch 2/5
+    583/583 [==============================] - 118s 202ms/step - loss: 0.0646 - accuracy: 0.9801 - val_loss: 0.1618 - val_accuracy: 0.9614
+    Epoch 3/5
+    583/583 [==============================] - 117s 201ms/step - loss: 0.0264 - accuracy: 0.9918 - val_loss: 0.1273 - val_accuracy: 0.9685
+    Epoch 4/5
+    583/583 [==============================] - 117s 201ms/step - loss: 0.0140 - accuracy: 0.9957 - val_loss: 0.1616 - val_accuracy: 0.9670
+test:
+    Test Loss: 0.13446593284606934
+    Test Accuracy: 0.9700000286102295
