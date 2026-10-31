@@ -13,3 +13,4 @@ class BertClassifier(tf.keras.Model):
         cls_output = outputs.last_hidden_state[:, 0, :]
         x = self.dropout(cls_output, training=training)
         return self.classifier(x)
+    

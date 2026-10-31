@@ -9,12 +9,10 @@ from bs4 import BeautifulSoup
 import trafilatura
 from model import BertClassifier
 
-# ------------------- Paths -------------------
 MODEL_DIR = "saved_model"
 WEIGHTS_PATH = os.path.join(MODEL_DIR, "weights.h5")
 CONFIG_PATH  = os.path.join(MODEL_DIR, "config.json")
 TOKENIZER_DIR = os.path.join(MODEL_DIR, "tokenizer")
-
 
 def extract_text_from_url(url):
     """Extracts main article text from a URL."""
@@ -45,7 +43,6 @@ def extract_text_from_url(url):
 
 def load_model_and_tokenizer():
     """Rebuilds the architecture and loads saved weights."""
-    # Load config
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = json.load(f)
 
@@ -53,23 +50,19 @@ def load_model_and_tokenizer():
     max_len = config["max_len"]
     label_names = config["label_names"]
 
-    # Rebuild the same architecture as in train.py
     print("Building model architecture...")
     bert = TFBertModel.from_pretrained(config["base_model"])
     model = BertClassifier(bert, num_labels)
 
-    # IMPORTANT: build the model once with a dummy input before loading weights
     dummy = {
         "input_ids": tf.zeros((1, max_len), dtype=tf.int32),
         "attention_mask": tf.ones((1, max_len), dtype=tf.int32),
     }
     _ = model(dummy)
 
-    # Load trained weights
     print("Loading trained weights...")
     model.load_weights(WEIGHTS_PATH)
 
-    # Load tokenizer
     print("Loading tokenizer...")
     tokenizer = BertTokenizer.from_pretrained(TOKENIZER_DIR)
 
@@ -86,7 +79,6 @@ def main(url):
         sys.exit(1)
     print("Extracted", len(text), "characters")
 
-    # Tokenize
     inputs = tokenizer(
         [text],
         padding=True,
@@ -95,7 +87,6 @@ def main(url):
         return_tensors="tf",
     )
 
-    # Predict
     prediction = model(inputs)
     probs = prediction.numpy()[0]
     predicted_index = int(np.argmax(probs))
@@ -124,9 +115,9 @@ def main(url):
         print(f"  {name:<15} {probs[i]:.4f}  {bar}")
     print("==============================")
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python predict.py <URL>")
         sys.exit(1)
     main(sys.argv[1])
+
