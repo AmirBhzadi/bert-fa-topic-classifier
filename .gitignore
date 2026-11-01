@@ -27,7 +27,6 @@ saved_model/*.keras
 saved_model/checkpoint*
 
 # ===== داده‌های بزرگ =====
-*.csv
 *.tsv
 *.txt
 !requirements.txt
